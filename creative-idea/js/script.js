@@ -220,6 +220,8 @@
 
     function animate() {
       ctx.clearRect(0, 0, W, H);
+
+      /* Draw connections */
       ctx.globalAlpha = 0.06;
       ctx.strokeStyle = '#C9A84C';
       ctx.lineWidth = 0.5;
@@ -237,6 +239,7 @@
           }
         }
       }
+
       particles.forEach(p => { p.update(); p.draw(); });
       ctx.globalAlpha = 1;
       requestAnimationFrame(animate);
@@ -276,21 +279,36 @@
 
     const btn = form.querySelector('.cf-submit');
     const orig = btn.textContent;
-    btn.textContent = lang === 'ar' ? 'جارى الإرسال...' : 'Sending…';
+    btn.textContent = lang === 'ar' ? 'جارٍ الإرسال...' : 'Sending…';
     btn.disabled = true;
     btn.style.opacity = '.7';
 
-    setTimeout(() => {
-      form.reset();
+    fetch('https://formspree.io/f/majed.jan@gmail.com', {
+      method: 'POST',
+      headers: { 'Accept': 'application/json' },
+      body: new FormData(form)
+    })
+    .then(res => {
       btn.textContent = orig;
       btn.disabled = false;
       btn.style.opacity = '';
-      if (success) { success.classList.add('show'); setTimeout(() => success.classList.remove('show'), 6000); }
-    }, 1400);
+      if (res.ok) {
+        form.reset();
+        if (success) { success.classList.add('show'); setTimeout(() => success.classList.remove('show'), 6000); }
+      } else {
+        alert(lang === 'ar' ? 'حدث خطأ، حاول مرة أخرى.' : 'Something went wrong. Please try again.');
+      }
+    })
+    .catch(() => {
+      btn.textContent = orig;
+      btn.disabled = false;
+      btn.style.opacity = '';
+      alert(lang === 'ar' ? 'تعذّر الإرسال، تحقّق من اتصالك.' : 'Failed to send. Check your connection.');
+    });
   });
 
   /* ════════════════════════════════
-     SCROLL HANDLER
+     SCROLL HANDLER (consolidated)
   ════════════════════════════════ */
   function onScroll() {
     updateProgress();
