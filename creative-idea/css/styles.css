@@ -581,8 +581,6 @@ body.lang-ar .srv-num { right:auto; left:24px }
 
 /* ── RTL Overrides ── */
 body.lang-ar .hero-body      { direction:rtl }
-body.lang-ar .hero-pill      { }
-body.lang-ar .hero-desc      { }
 body.lang-ar .about-pill     { flex-direction:row-reverse; text-align:right }
 body.lang-ar .av-chip-1      { left:auto; right:-10px }
 body.lang-ar .av-chip-2      { right:auto; left:-10px }
@@ -598,129 +596,168 @@ body.lang-ar .footer-bottom  { flex-direction:row-reverse }
 body.lang-ar .srv-card::after { transform-origin:right }
 body.lang-ar .strat-card     { text-align:right }
 body.lang-ar .team-card      { text-align:right }
+body.lang-ar .srv-num        { right:auto; left:24px }
 
-/* ── Responsive ── */
+/* ──────────────────────
+   RESPONSIVE
+────────────────────── */
+
+/* Laptop / tablet landscape */
 @media (max-width:1100px) {
-  .hero-body { grid-template-columns:1fr; max-width:680px; margin:0 auto }
+  .hero-body { grid-template-columns:1fr; max-width:700px; margin:0 auto }
   .hero-card { display:none }
-  .about-wrap { grid-template-columns:1fr; gap:48px }
+  .about-wrap { grid-template-columns:1fr; gap:40px }
   .srv-grid { grid-template-columns:repeat(2,1fr) }
   .strategy-grid { grid-template-columns:repeat(2,1fr) }
+  .section-head { max-width:100% }
 }
 
+/* Tablet portrait */
 @media (max-width:900px) {
-  .section { padding:80px 0 }
+  .section { padding:72px 0 }
   .team-grid { grid-template-columns:repeat(2,1fr) }
   .testi-grid { grid-template-columns:1fr }
   .plans-grid { grid-template-columns:1fr; max-width:480px; margin:0 auto }
   .plan-featured { transform:none }
   .plan-featured:hover { transform:translateY(-4px) }
-  .contact-wrap { grid-template-columns:1fr; gap:48px }
-  .footer-body { grid-template-columns:1fr; gap:48px }
+  .contact-wrap { grid-template-columns:1fr; gap:40px }
+  .footer-body { grid-template-columns:1fr; gap:40px }
   .footer-nav { grid-template-columns:repeat(2,1fr) }
   .cta-inner { flex-direction:column; text-align:center }
   .cta-btns { justify-content:center }
 }
 
+/* Mobile: nav + grid changes */
 @media (max-width:768px) {
   .nav-links {
-    display:none; position:fixed; inset:0; top:0; background:rgba(8,9,16,.97);
+    display:none; position:fixed; inset:0;
+    background:rgba(8,9,16,.97);
     flex-direction:column; align-items:center; justify-content:center;
     gap:12px; z-index:998; backdrop-filter:blur(20px);
   }
   .nav-links.open { display:flex }
-  .nav-links a { font-size:1.3rem; padding:16px 40px }
+  .nav-links a { font-size:1.2rem; padding:14px 36px }
   .hamburger { display:flex; z-index:999 }
   .srv-grid { grid-template-columns:1fr }
   .strategy-grid { grid-template-columns:1fr }
   .cf-row { grid-template-columns:1fr }
-  .hero-headline { font-size:2.4rem }
-  .hero-actions { flex-direction:column }
-  .hero-actions .btn { width:100%; text-align:center }
+  .hero-actions { flex-direction:column; align-items:stretch }
+  .hero-actions .btn { width:100%; justify-content:center }
   .footer-nav { grid-template-columns:1fr }
   .footer-bottom { flex-direction:column; gap:8px; text-align:center }
+  .av-chip { display:none }
+  .about-visual { padding:0 }
 }
 
+/* Phone ≤480px */
 @media (max-width:480px) {
-  .team-grid { grid-template-columns:1fr 1fr }
-  .ticker { animation-duration:18s }
-}
-
-/* ── Enhanced Mobile (phones) ── */
-@media (max-width:480px) {
-  .container { padding:0 16px }
-  .section { padding:60px 0 }
-  .section-head { margin-bottom:40px }
-
-  /* Hero */
-  .hero { padding-top:70px }
-  .hero-body { padding:40px 16px 20px }
-  .hero-pill { font-size:.72rem; padding:6px 14px }
-  .hero-desc { font-size:.95rem }
-  .hero-actions .btn { padding:13px 24px; font-size:.9rem }
-  .hero-scroll { padding-bottom:24px }
+  /* Layout */
+  .container { padding:0 14px }
+  .section { padding:52px 0 }
+  .section-head { margin-bottom:32px }
 
   /* Navbar */
-  .navbar { padding:14px 0 }
-  .navbar.scrolled { padding:10px 0 }
-  .logo-img { height:30px }
-  .logo-badge { width:32px; height:32px; font-size:.75rem }
-  .logo-main { font-size:.78rem }
-  .logo-sub { font-size:.62rem }
-  .lang-btn { padding:7px 12px; font-size:.75rem }
+  .navbar { padding:12px 0 }
+  .navbar.scrolled { padding:8px 0 }
+  .logo-img { height:28px }
+  .logo-badge { width:30px; height:30px; border-radius:7px; font-size:.7rem }
+  .logo-main { font-size:.75rem }
+  .logo-sub { font-size:.6rem }
+  .lang-btn { padding:6px 10px; font-size:.72rem; gap:5px }
+  .lang-btn svg { width:12px; height:12px }
 
-  /* Float buttons — no overlap */
-  .whatsapp-float { bottom:24px; left:20px; width:46px; height:46px }
-  .whatsapp-float svg { width:24px; height:24px }
-  .back-to-top { bottom:80px; right:20px }
-  body.lang-ar .back-to-top { right:auto; left:20px; bottom:80px }
-  body.lang-ar .whatsapp-float { right:20px }
+  /* Hero */
+  .hero { padding-top:60px; min-height:100svh }
+  .hero-body { padding:28px 14px 12px; gap:20px }
+  .hero-pill { font-size:.68rem; padding:5px 12px; margin-bottom:14px }
+  .hero-desc { font-size:.88rem; margin-bottom:22px }
+  .hero-scroll { padding-bottom:18px; font-size:.6rem }
 
-  /* Cards */
-  .srv-card { padding:28px 20px }
-  .plan-card { padding:32px 20px }
-  .strat-card { padding:24px 20px }
-  .testi-card { padding:24px 20px }
-  .team-card { padding:28px 14px 20px }
+  /* Typography */
+  h1 { font-size:clamp(1.9rem,8.5vw,2.6rem) }
+  h2 { font-size:clamp(1.45rem,6vw,1.9rem) }
+  h3 { font-size:.98rem }
+  .section-head h2 { margin:6px 0 10px }
+  .section-head p { font-size:.9rem }
 
-  /* About chips */
-  .av-chip { font-size:.72rem; padding:8px 12px }
-  .av-chip-1 { top:-8px; left:-4px }
-  .av-chip-2 { bottom:16px; right:-4px }
-  .av-chip-3 { bottom:-8px; left:16px }
+  /* Float buttons */
+  .whatsapp-float { bottom:20px; left:16px; width:46px; height:46px }
+  .whatsapp-float svg { width:22px; height:22px }
+  .back-to-top { bottom:76px; right:16px; width:40px; height:40px }
+  body.lang-ar .back-to-top { right:auto; left:16px }
+  body.lang-ar .whatsapp-float { left:auto; right:16px }
+
+  /* Service cards */
+  .srv-card { padding:22px 14px }
+  .srv-num { font-size:2.6rem; top:12px; right:14px }
+  .srv-icon { width:42px; height:42px; margin-bottom:12px }
+  .srv-icon svg { width:20px; height:20px }
+  .srv-card p { font-size:.84rem }
+
+  /* Strategy cards */
+  .strat-card { padding:20px 14px }
+  .strat-badge { width:36px; height:36px; font-size:.76rem; margin-bottom:12px }
+
+  /* Pricing */
+  .plans-grid { max-width:100% }
+  .plan-card { padding:26px 14px }
+  .plan-amount { font-size:2.4rem }
+  .plan-features li { font-size:.84rem }
+  .plans-note { font-size:.74rem; padding:0 4px }
+
+  /* Testimonials */
+  .testi-card { padding:20px 14px }
+  .testi-card p { font-size:.86rem }
+
+  /* Team */
+  .team-grid { grid-template-columns:1fr 1fr }
+  .team-card { padding:22px 10px 16px }
+  .tc-avatar { width:56px; height:56px; font-size:.95rem; margin-bottom:14px }
+  .tc-role { font-size:.72rem }
+
+  /* About */
+  .av-logo-box { aspect-ratio:4/3 }
+  .av-logo-img { padding:20px }
+  .av-ci-badge { width:56px; height:56px; font-size:1.3rem }
+  .about-pill { padding:11px 12px; gap:10px }
+  .ap-icon { font-size:1rem }
+  .about-pill strong { font-size:.83rem }
+  .about-pill span { font-size:.76rem }
 
   /* Contact */
-  .contact-wrap { gap:32px }
-  .ci-icon { width:36px; height:36px; font-size:1rem }
-
-  /* Footer */
-  .footer-body { padding:48px 16px 32px }
-  .footer-bottom { padding:16px }
-
-  /* Pricing note */
-  .plans-note { font-size:.78rem; padding:0 8px }
+  .contact-wrap { gap:24px }
+  .ci-icon { width:34px; height:34px; font-size:.9rem }
+  .cf-group label { font-size:.68rem }
+  .cf-group input, .cf-group select, .cf-group textarea { padding:10px 12px; font-size:.88rem }
+  .cf-submit { padding:13px 20px; font-size:.92rem }
 
   /* CTA */
-  .cta-banner { padding:64px 0 }
+  .cta-banner { padding:48px 0 }
   .cta-btns { flex-direction:column; width:100% }
-  .cta-btns .btn { width:100%; text-align:center }
+  .cta-btns .btn { width:100%; justify-content:center }
 
-  /* Typography tightening */
-  h2 { font-size:clamp(1.6rem,7vw,2.2rem) }
-  h3 { font-size:1.05rem }
+  /* Footer */
+  .footer-body { padding:36px 14px 24px; gap:28px }
+  .footer-brand p { font-size:.8rem; max-width:100% }
+  .footer-bottom { padding:12px 14px; font-size:.7rem }
+  .fn-col { gap:10px }
+  .fn-col a, .fn-col span { font-size:.78rem }
+
+  /* Ticker */
+  .ticker { animation-duration:15s; font-size:.68rem; gap:16px }
+
+  /* Buttons */
+  .btn { padding:12px 22px; font-size:.86rem }
 }
 
-/* ── Tablet (601–900px) ── */
+/* Tablet 601–900 landscape */
 @media (min-width:601px) and (max-width:900px) {
-  .hero-body { padding:50px 24px 30px }
-  .about-visual { padding:12px }
+  .hero-body { padding:48px 24px 28px }
   .plans-grid { max-width:520px }
 }
 
-/* ── Touch: bigger tap targets ── */
-@media (hover:none) {
-  .btn { padding:16px 32px }
-  .nav-links a { padding:12px 16px }
-  .srv-link { padding:6px 0 }
-  .fsoc { width:42px; height:42px }
+/* Touch devices: bigger tap targets */
+@media (hover:none) and (pointer:coarse) {
+  .btn { min-height:48px }
+  .fsoc { width:44px; height:44px }
 }
