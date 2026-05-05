@@ -221,7 +221,6 @@
     function animate() {
       ctx.clearRect(0, 0, W, H);
 
-      /* Draw connections */
       ctx.globalAlpha = 0.06;
       ctx.strokeStyle = '#C9A84C';
       ctx.lineWidth = 0.5;
@@ -251,7 +250,7 @@
   }
 
   /* ════════════════════════════════
-     CONTACT FORM
+     CONTACT FORM — FormSubmit.co
   ════════════════════════════════ */
   const form = $('#contact-form');
   const success = $('#cf-success');
@@ -283,10 +282,18 @@
     btn.disabled = true;
     btn.style.opacity = '.7';
 
-    fetch('https://formspree.io/f/majed.jan@gmail.com', {
+    fetch('https://formsubmit.co/ajax/majed.jan@gmail.com', {
       method: 'POST',
-      headers: { 'Accept': 'application/json' },
-      body: new FormData(form)
+      headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name:    name,
+        email:   email,
+        company: $('#cf-company', form)?.value.trim() || '',
+        phone:   $('#cf-phone', form)?.value.trim() || '',
+        service: $('#cf-service', form)?.value || '',
+        message: msg,
+        _subject: 'New enquiry — Creative Idea Website'
+      })
     })
     .then(res => {
       btn.textContent = orig;
@@ -303,12 +310,12 @@
       btn.textContent = orig;
       btn.disabled = false;
       btn.style.opacity = '';
-      alert(lang === 'ar' ? 'تعذّر الإرسال، تحقّق من اتصالك.' : 'Failed to send. Check your connection.');
+      alert(lang === 'ar' ? 'تعذّر الإرسال، تحقق من اتصالك.' : 'Failed to send. Check your connection.');
     });
   });
 
   /* ════════════════════════════════
-     SCROLL HANDLER (consolidated)
+     SCROLL HANDLER
   ════════════════════════════════ */
   function onScroll() {
     updateProgress();
