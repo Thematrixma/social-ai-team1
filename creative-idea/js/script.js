@@ -221,6 +221,7 @@
     function animate() {
       ctx.clearRect(0, 0, W, H);
 
+      /* Draw connections */
       ctx.globalAlpha = 0.06;
       ctx.strokeStyle = '#C9A84C';
       ctx.lineWidth = 0.5;
@@ -250,7 +251,7 @@
   }
 
   /* ════════════════════════════════
-     CONTACT FORM — FormSubmit.co
+     CONTACT FORM
   ════════════════════════════════ */
   const form = $('#contact-form');
   const success = $('#cf-success');
@@ -282,17 +283,18 @@
     btn.disabled = true;
     btn.style.opacity = '.7';
 
-    fetch('https://formsubmit.co/ajax/majed.jan@gmail.com', {
+    fetch('https://api.web3forms.com/submit', {
       method: 'POST',
       headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        name:    name,
-        email:   email,
+        access_key: '8aac3edb-4857-4552-9a80-93b9cb5e0ffc',
+        name:    $('#cf-name', form).value.trim(),
+        email:   $('#cf-email', form).value.trim(),
         company: $('#cf-company', form)?.value.trim() || '',
         phone:   $('#cf-phone', form)?.value.trim() || '',
         service: $('#cf-service', form)?.value || '',
-        message: msg,
-        _subject: 'New enquiry — Creative Idea Website'
+        message: $('#cf-message', form).value.trim(),
+        subject: 'New enquiry — Creative Idea Website'
       })
     })
     .then(res => {
@@ -315,7 +317,7 @@
   });
 
   /* ════════════════════════════════
-     SCROLL HANDLER
+     SCROLL HANDLER (consolidated)
   ════════════════════════════════ */
   function onScroll() {
     updateProgress();
